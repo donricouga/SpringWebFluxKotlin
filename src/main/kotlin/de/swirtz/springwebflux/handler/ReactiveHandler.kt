@@ -1,5 +1,6 @@
 package de.swirtz.springwebflux.handler
 
+import de.swirtz.springwebflux.repository.ReactiveConfigurationRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
@@ -13,15 +14,21 @@ class ReactiveHandler {
     @Autowired
     lateinit var repo: NamesRepo
 
+    @Autowired
+    lateinit var configurationRepo: ReactiveConfigurationRepository
+
     fun getName(search: String): Mono<String> = repo.get(search).toMono().map { "Result: $it!" }
     fun addName(text: String): Mono<String> = repo.add(text).toMono().map { "Result: $it!" }
     fun getAllNames(): Flux<String> = repo.getAll().toFlux().map { "Result: $it" }
+    fun getConfiguration() = configurationRepo.findById("ricardo")
 }
 
 @Repository
 class NamesRepo {
+
     private val entities = mutableListOf<String>()
     fun add(name: String) = entities.add(name)
     fun get(name: String) = entities.find { it == name } ?: "not found!"
     fun getAll() = listOf(entities)
+
 }

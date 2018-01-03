@@ -41,10 +41,12 @@ repositories {
 }
 
 dependencies {
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion")
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     compile("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
     compile("org.springframework.boot:spring-boot-starter-actuator:$springBootVersion")
     compile("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-data-cassandra-reactive:$springBootVersion")
+    compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.3")
     testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testCompile("io.projectreactor:reactor-test")
 }

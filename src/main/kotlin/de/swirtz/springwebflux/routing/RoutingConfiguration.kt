@@ -31,6 +31,11 @@ class RoutingConfiguration {
                 ok().body(handler.addName(pathVar))
             }
         }
+        ("/configuration").nest {
+            GET("/") {
+                ok().body(handler.getConfiguration())
+            }
+        }
     }
 }
 
